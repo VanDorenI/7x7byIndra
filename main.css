@@ -130,7 +130,7 @@ img {
 #archive-popup {
   position: relative;
   overflow: hidden;
-  top: 20vh;
+  top: 10vh;
   left: 10px;
   width: calc(100% - 20px);
   max-width: auto;
@@ -151,9 +151,9 @@ img {
 
 @media (min-width: 720px) {
   #archive-popup {
-    width: 500px;
+    width: 600px;
     margin: 0 auto;
-    top: 20vh;
+    top: 15vh;
   }
 }
 /******* TEKST ARCHIVE *******/
