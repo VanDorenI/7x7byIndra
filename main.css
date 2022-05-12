@@ -113,6 +113,7 @@ img {
   height: 100%;
   overflow: hidden;
   object-fit: cover;
+  cursor: pointer;
 }
 
 #archive-container img:hover {
@@ -158,6 +159,10 @@ img {
   }
 }
 /******* TEKST ARCHIVE *******/
+#archive-popup-caption {
+  display: flex;
+  justify-content: space-between;
+}
 
 #archive-popup-year {
   font-family: Neutral;
@@ -166,4 +171,32 @@ img {
   font-size: 12px;
   color: rgb(0, 0, 0);
   text-align: left;
+}
+
+#archive-popup-iframe {
+  display: none;
+  width: calc(600px - 4px);
+  height: calc(600px - 4px);
+  overflow: hidden;
+  border: none;
+}
+
+#archive-popup-code-wrapper {
+  display: none;
+  width: calc(600px - 4px);
+  height: calc(600px - 4px);
+  overflow: auto;
+  border: none;
+}
+
+.active {
+  font-weight: bold;
+}
+
+.archive-popup-button {
+  border: 1px solid #999;
+  background: black;
+  color: white;
+  text-decoration: none;
+  font: inherit;
 }
