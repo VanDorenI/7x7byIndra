@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>simple example</title>
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
+    <script src="https://unpkg.com/p5"></script>
+    <script>
+      // Kleurenpalet (HBS)
+      const COLORS = ["#FF0051", "#FF3300", "#FF9900", "#FFEE38"];
+
+        // Variabel getal.
+        let a = 8; 
+
+      //Canvas opbouw
+      function setup() {
+          // Canvas in pixels. Dit voegt de canvas tag toe in de pagina. 
+          createCanvas(800, 800);
+          // Zet color mode op Hue/Saturation/Brightness
+          colorMode(HSB);
+          // Stel de achtergrondkleur in. 
+          background("#FFBDE0");
+          // Voeg onderaan de credits toe. (naam)
+          addCredit();"Indra Van Doren"
+          // Zorgt ervoor dat het canvas geen omtreklijn heeft. 
+          noStroke();
+      }
+
+      // Tekenfunctie voor grid op canvas.
+      function draw() {
+        // Zorg dat de random steeds dezelfde is om het flikkeren te vermijden.
+        randomSeed(99);
+        // Index geeft het "volgnummer" van elk elementje door.
+        let index = 0;
+        // Maakt een grid met rijen en kolommen (pixels / getal = aantal rijen).
+        for (let gy = 0; gy < height; gy += 30) {
+        for (let gx = 0; gx < width; gx += 100) {
+        // Onthoud de vorige positie.
+        push();
+          // Verschuif naar de juiste positie in het grid.
+          translate(gx, gy);
+          // Schalen van het grid, in 'drawElement' kan je dan met een andere vehouding van het grid werken dan de aangegeven pixels.
+          scale();
+          // Teken het element.
+          drawElement1(index);
+        // Ga terug naar de originele positie.
+        pop();
+          // Verhoog de index met 1 voor het volgende volgnummer.
+          index++;
+          }
+        }
+        
+        // Maakt een grid met rijen en kolommen (pixels / getal = aantal rijen).
+        for (let gy = 0; gy < height; gy += 50) {
+        for (let gx = 0; gx < width; gx += 10) {
+        // Onthoud de vorige positie.
+        push();
+          // Verschuif naar de juiste positie in het grid.
+          translate(gx, gy);
+          // Schalen van het grid, in 'drawElement' kan je dan met een andere vehouding van het grid werken dan de aangegeven pixels.
+          scale();
+          // Teken het element.
+          drawAnotherLine(index);
+        // Ga terug naar de originele positie.
+        pop();
+          // Verhoog de index met 1 voor het volgende volgnummer.
+          index++;
+          }
+        }
+      } 
+    
+        // Maakt een grid met rijen en kolommen (pixels / getal = aantal rijen).
+        for (let gy = 0; gy < height; gy += 80) {
+        for (let gx = 0; gx < width; gx += 10) {
+        // Onthoud de vorige positie.
+        push();
+          // Verschuif naar de juiste positie in het grid.
+          translate(gx, gy);
+          // Schalen van het grid, in 'drawElement' kan je dan met een andere vehouding van het grid werken dan de aangegeven pixels.
+          scale();
+          // Teken het element.
+          drawYetAnotherLine(index);
+        // Ga terug naar de originele positie.
+        pop();
+          // Verhoog de index met 1 voor het volgende volgnummer.
+          index++;
+          }
+        }
+    
+       // Tekenfunctie voor grid op canvas.
+      function drawElement1(index) {
+          // Zorgt voor een dunne omlijning rond een vorm.
+          stroke(random(COLORS));
+          // Bepaald de vorm van het einde van de lijn, rond of hoekig.
+          strokeCap(PROJECT);
+          // lijndikte.
+          strokeWeight(1);
+          // Lijn op grid. (Positie Y-as Begin, Positie X-as Begin, Positie Y-as Einde, Positie X-as Einde)
+          line(a, 0, a, height);
+        // Variabel getal.
+        for (let a = 30; a < 100; a += 8) {
+          // Lijn op grid. (Positie Y-as Begin, Positie X-as Begin, Positie Y-as Einde, Positie X-as Einde)
+          line(a, 0, a, 30);
+        }
+      }
+
+       // Tekenfunctie voor grid op canvas.
+      function drawAnotherLine() {
+        // Variabel getal.
+        let a = 5;
+          // Zorgt voor een dunne omlijning rond een vorm.
+          stroke("#000DFF");
+          // lijndikte.
+          strokeWeight(1);
+          // Vorm op grid. (Positie Y-as, Positie X-as, Breedte, Hoogte)
+          ellipse(a, 0, a, 1);
+        }
+
+       // Tekenfunctie voor grid op canvas.
+      function drawYetAnotherLine() {
+        // Variabel getal.
+        let a = 20;
+          // Zorgt voor een dunne omlijning rond een vorm.
+          stroke("#A200FF");
+          // lijndikte.
+          strokeWeight(9);
+          // kleurinvulling van element. (GEEN)
+          noFill();
+          // Vorm op grid. (Positie Y-as, Positie X-as, Breedte, Hoogte)
+          ellipse(a, 90, a, 0);
+        }
+
+      // Deze functie voegt de credits toe. 
+      function addCredit() {
+        const date = document.location.pathname.split(".html")[0].substring(1);
+        const p = createP(
+          `${date} — <a " target="_blank">Indra Van Doren</a>`
+        ).parent(select("main"));
+      }
+    </script>
+  </body>
+</html>

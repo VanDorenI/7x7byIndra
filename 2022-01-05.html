@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>simple example</title>
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
+    <script src="https://unpkg.com/p5"></script>
+    <script>
+      // Kleurenpalet (HBS)
+      const COLORS = ["#FF006A", "#00FF00", "#0400FF", "#000000"];
+
+      //Canvas opbouw
+      function setup() {
+          // Canvas in pixels. Dit voegt de canvas tag toe in de pagina. 
+          createCanvas(800, 800);
+          // Zet color mode op Hue/Saturation/Brightness
+          colorMode(HSB);
+          // Stel de achtergrondkleur in. 
+          background("#FFFFFF");
+          // Voeg onderaan de credits toe. (naam)
+          addCredit();"Indra Van Doren"
+          // zorgt ervoor dat het canvas geen omtreklijn heeft. 
+          noStroke();
+          // Zorgt voor een dunne omlijning rond een vorm.
+          stroke(random(COLORS));
+          // lijndikte.
+          strokeWeight(0.5);
+          // Zorgt ervoor dat het niet mogelijk is om het scherm te manipuleren met 'mousePressed' of 'keyPressed'.
+          noLoop();
+          // Rotatie van het grid.
+          rotate(10);
+      }
+
+      // Tekenfunctie voor grid op canvas.
+      function draw() {
+        // Index geeft het "volgnummer" van elk elementje door.
+        let index = 0;
+        // Maakt een grid met rijen en kolommen (pixels / getal = aantal rijen).
+        for (let gy = 0; gy < height; gy += 200) {
+        for (let gx = 0; gx < width; gx += 200) {
+        // Onthoud de vorige positie.
+        push();
+          // Verschuif naar de juiste positie in het grid.
+          translate(gx, gy);
+          // Schalen van het grid, in 'drawElement' kan je dan met een andere vehouding van het grid werken dan de aangegeven pixels.
+          scale(20);
+          // Teken het element.
+          drawElement1(index);
+        // Ga terug naar de originele positie.
+        pop();
+          // Verhoog de index met 1 voor het volgende volgnummer.
+          index++;
+          }
+        }
+        
+        // Maakt een grid met rijen en kolommen (pixels / getal = aantal rijen).
+        for (let gy = 0; gy < height; gy += 100) {
+        for (let gx = 0; gx < width; gx += 60) {
+        // Onthoud de vorige positie.
+        push();
+          // Verschuif naar de juiste positie in het grid.
+          translate(gx, gy);
+          // Schalen van het grid, in 'drawElement' kan je dan met een andere vehouding van het grid werken dan de aangegeven pixels.
+          scale(4);
+          // Teken het element.
+          drawElement2(index);
+        // Ga terug naar de originele positie.
+        pop();
+          // Verhoog de index met 1 voor het volgende volgnummer.
+          index++;
+          }
+        }
+      }
+        
+      // Tekenfunctie voor elementen op het grid.
+      function drawElement1(index){
+            // kleurinvulling van element.
+            fill("#FFE5A3");
+            // overeenkomende kleuren met elkaar laten overlappen en kleuren laten vermenigvuldigen.
+            blendMode(MULTIPLY)
+            // Geen lijn.
+            noStroke();
+            // Vorm op grid. (Positie Y-as, Positie X-as, Breedte, Hoogte)
+            rect(0, 0, 25, 25);
+        }
+    
+    
+      // Tekenfunctie voor elementen op het grid.
+      function drawElement2(index) {
+          // kleurinvulling van element.
+          fill(random(COLORS));
+          // Zorgt voor een dunne omlijning rond een vorm.
+          stroke(0);
+        // Deze modus zorgt er voor dat vormen op een zelfde plek kunnen staan en 'in elkaar' lijken te staan. 
+        // Radius beslist dat de vorm uitlijnt op de lijn van de vorige vorm.
+        ellipseMode(RADIUS);
+          // kleurinvulling van element.
+          fill(random(COLORS));
+          // Vorm op grid. (Positie Y-as, Positie X-as, Breedte, Hoogte)
+          ellipse(10, 13, 4, 10); // Grootste  ellips
+        // Deze modus zorgt er voor dat vormen op een zelfde plek kunnen staan en 'in elkaar' lijken te staan. 
+        // Radius beslist dat de vorm uitlijnt op de lijn van de vorige vorm.
+        ellipseMode(RADIUS);
+          // kleurinvulling van element.
+          fill(random(COLORS));
+          // Vorm op grid. (Positie Y-as, Positie X-as, Breedte, Hoogte)
+          ellipse(10, 13, 3, 9); // Middelste ellips
+        // Deze modus zorgt er voor dat vormen op een zelfde plek kunnen staan en 'in elkaar' lijken te staan. 
+        // Radius beslist dat de vorm uitlijnt op de lijn van de vorige vorm.
+        ellipseMode(CENTER);
+          // kleurinvulling van element.
+          fill(random(COLORS));
+          // Vorm op grid. (Positie Y-as, Positie X-as, Breedte, Hoogte)
+          ellipse(10, 13, 2, 8); // Kleinste  ellips
+        }
+      
+      
+
+      // Deze functie voegt de credits toe. 
+      function addCredit() {
+        const date = document.location.pathname.split(".html")[0].substring(1);
+        const p = createP(
+          `${date} — <a " target="_blank">Indra Van Doren</a>`
+        ).parent(select("main"));
+      }
+    </script>
+  </body>
+</html>

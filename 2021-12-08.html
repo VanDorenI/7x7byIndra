@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>simple example</title>
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
+    <script src="https://unpkg.com/p5"></script>
+    <script>
+      // Kleurenpalet (HBS)
+      const COLORS = ["#FF0400", "#000DFF"];
+
+      //Canvas opbouw
+      function setup() {
+          // Canvas in pixels. Dit voegt de canvas tag toe in de pagina.
+          createCanvas(800, 800);
+          // Zet color mode op Hue/Saturation/Brightness
+          colorMode(HSB);
+          // Stelt de achtergrondkleur in.
+          background(random(COLORS));
+          // Voeg onderaan de credits toe. (naam)
+          addCredit();"Indra Van Doren"
+          // zorgt ervoor dat het canvas geen omtreklijn heeft.
+          noStroke();
+      }
+
+      // Tekenfunctie voor grid op canvas.
+      function draw() {
+        // Zorg dat de random steeds dezelfde is om het flikkeren te vermijden.
+        randomSeed(130);
+        // Index geeft het "volgnummer" van elk elementje door.
+        let index = (random);
+        // Maakt een grid met rijen en kolommen (pixels / getal = aantal rijen).
+        for (let gy = 0; gy < height; gy += 90) {
+        for (let gx = 0; gx < width; gx += 80) {
+      // Onthoud de vorige positie.
+      push();
+        // Verschuif naar de juiste positie in het grid.
+        translate(gx, gy);
+        // Schalen van het grid, in 'drawElement' kan je dan met een andere vehouding van het grid werken dan de aangegeven pixels.
+        scale(0.5);
+        // Teken het element.
+        drawElement(index);
+      // Ga terug naar de originele positie.
+      pop();
+        // Verhoog de index met 1 voor het volgende volgnummer.
+        index;
+          }
+        }
+      } 
+
+      // Tekenfunctie voor elementen op het grid.
+       function drawElement(index) {
+        // Kleurinvulling van element.
+        fill(random(COLORS));
+        // Zorgt voor een dunne omlijning rond een vorm.
+        stroke(0);
+        // Vorm op grid. (Positie Y-as, Positie X-as, Breedte, Hoogte)
+        // Linker vierkant
+        rect(0, 30, 140, 140); 
+        // overeenkomende kleuren met elkaar laten overlappen en kleuren verlichten.
+        blendMode(LIGHTEST)
+
+      push(); 
+        // lijndikte.
+        strokeWeight(5);
+        // kleurinvulling van element.
+        fill(random(COLORS));
+        // overeenkomende kleuren met elkaar laten overlappen en kleuren laten vermenigvuldigen. 
+        blendMode(MULTIPLY)
+        // Vorm op grid. (Positie Y-as, Positie X-as, Breedte, Hoogte)
+        rect(40, 30, 60, 60); 
+
+      // Ga terug naar de originele positie.
+      push(); 
+        // lijndikte.
+        stroke(0, 102, 153);
+        // kleurinvulling van element.
+        fill(random(COLORS));
+        // overeenkomende kleuren met elkaar laten overlappen en kleuren laten verschillen. 
+        blendMode(DIFFERENCE);
+        // Vorm op grid. (Positie Y-as, Positie X-as, Breedte, Hoogte)
+        rect(85, 30, 40, 40); 
+      // Ga terug naar de originele positie.
+      pop(); 
+
+      // Ga terug naar de originele positie.
+      pop(); 
+        // Vorm op grid. (Positie Y-as, Positie X-as, Breedte, Hoogte)
+        rect(130, 30, 20, 20); 
+        // kleurinvulling van element.
+        fill(random(COLORS));
+        // overeenkomende kleuren met elkaar laten overlappen en kleuren in elkaar laten branden. 
+        blendMode(BURN);
+
+  
+
+}
+    
+      // Deze functie voegt de credits toe. Hier moet je enkel je naam en de website URL aanpassen.
+      function addCredit() {
+        const date = document.location.pathname.split(".html")[0].substring(1);
+        const p = createP(
+          `${date} — Indra Van Doren</a>`
+        ).parent(select("main"));
+      }
+    </script>
+  </body>
+</html>

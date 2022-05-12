@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>simple example</title>
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
+    <script src="https://unpkg.com/p5"></script>
+    <script>
+      // Kleurenpalet (HBS)
+      const COLORS = ["#FF8370", "#FFCD70", "#FF70A9", "#9EFFC5"];
+
+      //Canvas opbouw
+      function setup() {
+          // Canvas in pixels. Dit voegt de canvas tag toe in de pagina.
+          createCanvas(800, 800);
+          // Zet color mode op Hue/Saturation/Brightness
+          colorMode(HSB);
+          // Stelt de achtergrondkleur in. 
+          background(random(COLORS));
+          // Voeg onderaan de credits toe. (naam)
+          addCredit();"Indra Van Doren"
+          // zorgt ervoor dat het canvas geen omtreklijn heeft. 
+          noStroke();
+      }
+
+      // Tekenfunctie voor grid op canvas.
+      function draw() {
+        // Zorg dat de random steeds dezelfde is om het flikkeren te vermijden.
+        randomSeed(130);
+        // Index geeft het "volgnummer" van elk elementje door.
+        let index = (random);
+        // Maakt een grid met rijen en kolommen (pixels / getal = aantal rijen).
+        for (let gy = 0; gy < height; gy +=100) {
+        for (let gx = 0; gx < width; gx += 100) {
+      // Onthoud de vorige positie.
+      push();
+          // Verschuif naar de juiste positie in het grid.
+          translate(gx, gy);
+          // Schalen van het grid, in 'drawElement' kan je dan met een andere vehouding van het grid werken dan de aangegeven pixels.
+          scale(0.5);
+          // Teken het element.
+          drawElement(index);
+        // Ga terug naar de originele positie.
+        pop();
+          // Verhoog de index met 1 voor het volgende volgnummer.
+          index++;
+          }
+        }
+      } 
+
+       // Tekenfunctie voor elementen op het grid.
+       function drawElement(index) {
+        // Kleurinvulling van element.
+        fill(random(COLORS));
+        // Lijndikte
+        stroke(0);
+        // Deze modus zorgt er voor dat vormen op een zelfde plek kunnen staan en 'in elkaar' lijken te staan.
+        // Radius beslist dat de vorm uitlijnt op de lijn van de vorige vorm. 
+        rectMode(RADIUS);
+          // Kleurinvulling van element.
+          fill(random(COLORS));
+          // Vorm op grid. (Positie Y-as, Positie X-as, Breedte, Hoogte) Dit is de buiten vorm 
+          rect(100, 100, 90, 90);
+
+        // Deze modus zorgt er voor dat vormen op een zelfde plek kunnen staan en 'in elkaar' lijken te staan. 
+        // Radius beslist dat de vorm uitlijnt op de lijn van de vorige vorm.
+        ellipseMode(RADIUS);
+          // Kleurinvulling van element.
+          fill(random(COLORS));
+          // Vorm op grid. (Positie Y-as, Positie X-as, Breedte, Hoogte) Dit is de tweede grootste vorm.
+          ellipse(100, 100, 60, 60); 
+
+        // Deze modus zorgt er voor dat vormen op een zelfde plek kunnen staan en 'in elkaar' lijken te staan. 
+        // Center bepaald dat de vorm in het center van de vorige vorm staat. 
+        rectMode(CENTER);
+          // Kleurinvulling van element.
+          fill(random(COLORS));
+          // Vorm op grid. (Positie Y-as, Positie X-as, Breedte, Hoogte) Dit is de derde grootste vorm
+          rect(100, 100, 50, 50); 
+
+        // Deze modus zorgt er voor dat vormen op een zelfde plek kunnen staan en 'in elkaar' lijken te staan. 
+        // Center bepaald dat de vorm in het center van de vorige vorm staat. 
+        ellipseMode(CENTER);
+          // Kleurinvulling van element.
+          fill(random(COLORS));
+          // Vorm op grid. (Positie Y-as, Positie X-as, Breedte, Hoogte) Dit is de middelste en kleinste vorm
+          ellipse(100, 100, 20, 20); 
+
+}
+    
+      // Deze functie voegt de credits toe.
+      function addCredit() {
+        const date = document.location.pathname.split(".html")[0].substring(1);
+        const p = createP(
+          `${date} — Indra Van Doren</a>`
+        ).parent(select("main"));
+      }
+    </script>
+  </body>
+</html>

@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>simple example</title>
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
+    <script src="https://unpkg.com/p5"></script>
+    <script>
+      // Kleurenpalet (HBS)
+      const COLORS = ["#FF006A", "#00FF00", "#0400FF", "#000000"];
+
+      //Canvas opbouw
+      function setup() {
+          // Canvas van 500 op 500 pixels. Dit voegt de canvas tag toe in de pagina. 
+          createCanvas(500, 500);
+          // Zet color mode op Hue/Saturation/Brightness
+          colorMode(HSB);
+          // Stel de achtergrondkleur in. 
+          background(000000);
+          // Voeg onderaan de credits toe. (naam)
+          addCredit();"Indra Van Doren"
+          // zorgt ervoor dat het canvas geen omtreklijn heeft. 
+          noStroke();
+          // Zorgt voor een dunne omlijning rond een vorm.
+          stroke(random(COLORS));
+          // lijndikte.
+          strokeWeight(4);
+          // Zorgt ervoor dat het niet mogelijk is om het scherm te manipuleren met 'mousePressed' of 'keyPressed'.
+          noLoop(5);
+          // Rotatie van het grid.
+          rotate(2);
+      }
+
+
+      // Tekenfunctie voor grid op canvas.
+      function draw() {
+        // Zorg dat de random steeds dezelfde is om het flikkeren te vermijden.
+        randomSeed();
+        // Index geeft het "volgnummer" van elk elementje door.
+        let index = 0;
+        // Maakt een grid met rijen en kolommen (pixels / getal = aantal rijen).
+        for (let gy = 0; gy < height; gy += 10) {
+        for (let gx = 0; gx < width; gx += 10) {
+        // Onthoud de vorige positie.
+        push();
+          // Verschuif naar de juiste positie in het grid.
+          translate(gx, gy);
+          // Schalen van het grid, in 'drawElement' kan je dan met een andere vehouding van het grid werken dan de aangegeven pixels.
+          scale();
+          // Teken het element.
+          drawAnotherLine()
+          drawAnotherLine2()
+          drawAnotherLine3()
+        // Ga terug naar de originele positie.
+        pop();
+          // Verhoog de index met 1 voor het volgende volgnummer.
+          index++;
+          }
+        
+        // Maakt een grid met rijen en kolommen (pixels / getal = aantal rijen).
+        for (let gy = 0; gy < height; gy += 500) {
+        for (let gx = 0; gx < width; gx += 500) {
+        // Onthoud de vorige positie.
+        push();
+          // Verschuif naar de juiste positie in het grid.
+          translate(gx, gy);
+          // Schalen van het grid, in 'drawElement' kan je dan met een andere vehouding van het grid werken dan de aangegeven pixels.
+          scale(0);
+          // Teken het element.
+          drawYetAnotherLine()
+        // Ga terug naar de originele positie.
+        pop();
+          // Verhoog de index met 1 voor het volgende volgnummer.
+          index++;
+          }
+        }
+      }
+    
+      // Tekenfunctie voor elementen op het grid.
+      function drawAnotherLine() {
+          // kleurinvulling van element.
+          fill(random(COLORS));
+          // overeenkomende kleuren met elkaar laten overlappen en kleuren laten vermenigvuldigen.
+          blendMode(MULTIPLY)
+          // Vorm op grid. (x1, y1, x2, y2, x3, y3, x4, y4)
+          quad(0, 0, 36, 20, 369, 363, 490, 490);
+          }
+
+      // Tekenfunctie voor elementen op het grid.
+      function drawAnotherLine2() {
+          // kleurinvulling van element.
+          fill(random(COLORS));
+          // overeenkomende kleuren met elkaar laten overlappen en kleuren laten inbranden.
+          blendMode(BURN)
+          // Vorm op grid. (x1, y1, x2, y2, x3, y3, x4, y4)
+          quad(0, 0, 26, 220, 269, 263, 420, 420);
+          }
+
+      // Tekenfunctie voor elementen op het grid.
+      function drawAnotherLine3() {
+          // kleurinvulling van element.
+          fill(random(COLORS));
+          // overeenkomende kleuren met elkaar laten overlappen en kleuren laten verlichten.
+          blendMode(LIGHTEST)
+          // Vorm op grid. (x1, y1, x2, y2, x3, y3, x4, y4)
+          quad(0, 0, 10, 10, 169, 163, 310, 410);
+        }
+      }
+    
+      // Deze functie voegt de credits toe. 
+      function addCredit() {
+        const date = document.location.pathname.split(".html")[0].substring(1);
+        const p = createP(
+          `${date} — <a " target="_blank">Indra Van Doren</a>`
+        ).parent(select("main"));
+      }
+    </script>
+  </body>
+</html>

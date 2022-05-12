@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>simple example</title>
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
+    <script src="https://unpkg.com/p5"></script>
+    <script>
+      // Kleurenpalet (HBS)
+      const COLORS = ["#00C8FF", "#FF0080", "#FFA600", "#A200FF", "#004A94"];
+
+          // Positie op de X- en Y-as.
+          let x, y; 
+          // De lijn beweegt in een hoek van 0 graden. 
+          let currentangle = 0; // which way the turtle is pointing
+          // Spatiering tussen de stippen. 
+          let step = 120; 
+          // De hoek waarin de lijn draait. 
+          let angle = 80; 
+          // De start van de lijn. (axioma)
+          let thestring = 'A'; 
+          // Aantal herhalingen.
+          let numloops = 5; 
+          // Aantal regels. 
+          let therules = []; 
+          // De eerste regel.
+          therules[0] = ['A', '-BF+AFA+FB-']; 
+          // De tweede regel. 
+          therules[1] = ['B', '+AF-BFB-FA+']; 
+          // Positie van de lijn
+          let whereinstring = 0; 
+
+      //Canvas opbouw de X- en Y-as.
+      function setup() {
+          // Canvas in pixels. Dit voegt de canvas tag toe in de pagina. 
+          createCanvas(800, 800);
+          // Zet color mode op Hue/Saturation/Brightness
+          colorMode(HSB);
+          // Stel de achtergrondkleur in. 
+          background("#004A94");
+          // Voeg onderaan de credits toe. (naam)
+          addCredit();"Indra Van Doren"
+          // Zorgt ervoor dat het canvas geen omtreklijn heeft. 
+          noStroke();
+
+          // Startpunt op 
+          x = 0;
+          y = height-1;
+        for (let i = 0; i < numloops; i++) {
+          thestring = lindenmayer(thestring);
+        }
+      }
+
+      // Tekenfunctie voor string op canvas.
+      function draw() {
+          // Teken het  teken in de string.
+          drawIt(thestring[whereinstring]);
+          // Verhoog het punt van de tekenreeks als er meerdere nodig zijn. (is zoals index.)
+          whereinstring++;
+        if (whereinstring > thestring.length-1) whereinstring = 0;
+        }
+
+       // Tekenfunctie voor looprichting string op het grid. 
+      function lindenmayer(s) {
+          // Zorgt voor een leeg canvas bij het begin. 
+          let outputstring = ''; 
+        // Doorloopt 'therules' op zoek naar symboolovereenkomsten:
+        for (let i = 0; i < s.length; i++) {
+          // Standaard, geen overeenkomst.
+          let ismatch = 0; 
+        for (let j = 0; j < therules.length; j++) {
+        if (s[i] == therules[j][0])  {
+          // Schrijft een vervanging.
+          outputstring += therules[j][1]; 
+          // Als we  een overeenkomst hebben, kopieer het symbool niet.
+          ismatch = 1; 
+        // Ga uit de loop. 
+        break; 
+        }
+      }
+        // Als niets overeenkomt, kopieert dan het symbool.
+        if (ismatch == 0) outputstring+= s[i];
+        } 
+        // Verstuur de gewijzigde string.
+        return outputstring; 
+        }
+
+      // Tekenfunctie voor element op het string. 
+      function drawIt(k) {
+        // Eerst tekenen
+        if (k=='F') { 
+          // Aan de hand van de radius de stappen bepalen. 
+            let x1 = x + step*cos(radians(currentangle));
+            let y1 = y + step*sin(radians(currentangle));
+            // De oude en nieuwe string verbinden.
+            line(x, y, x1, y1); 
+            // Positie van stip updaten.
+            x = x1;
+            y = y1;
+        // Bepaald de richting van de string. (Links)
+        } 
+        else if (k == '+') {
+          currentangle += angle; 
+        } 
+        // Bepaald de richting van de lijn. (Rechts)
+        else if (k == '-') {
+          currentangle -= angle; 
+        }
+            // Bepaald de radius van de cirkels.
+            let radius = 10;
+            radius += random(0, 60);
+            radius += random(0, 70);
+            radius += random(0, 30);
+            radius = radius / 2;
+            // kleurinvulling van element.
+            fill(random(COLORS));
+            // Vorm op grid. (Positie Y-as, Positie X-as, Breedte, Hoogte)
+            ellipse(x, y, radius, radius);
+          }
+
+      // Deze functie voegt de credits toe. 
+  function addCredit() {
+        const date = document.location.pathname.split(".html")[0].substring(1);
+        const p = createP(
+          `${date} — <a " target="_blank">Indra Van Doren</a>`
+        ).parent(select("main"));
+      }
+    </script>
+  </body>
+</html>

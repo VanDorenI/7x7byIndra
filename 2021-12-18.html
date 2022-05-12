@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>simple example</title>
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
+    <script src="https://unpkg.com/p5"></script>
+    <script>
+      // Kleurenpalet (HBS)
+      const COLORS = ["#00C8FF", "#FF0080", "#FFA600", "#A200FF", "#004A94"];
+
+      // Beginpunt verticale lijn.
+      let x = 100;
+      // Beginpunt horizontale lijn
+      let y = 100;
+      // Grootte van de vorm.
+      let sz = 100;
+      
+      //Canvas opbouw
+      function setup() {
+          // Specificeert het aantal frames dat elke seconde moet worden weergegeven.
+          frameRate(9);
+          // Canvas in pixels. Dit voegt de canvas tag toe in de pagina
+          createCanvas(800, 800);
+          // Zet color mode op Hue/Saturation/Brightness
+          colorMode(HSB);
+          // Stel de achtergrondkleur in. 
+          background("#004A94");
+        // Deze modus zorgt er voor dat vormen op een zelfde plek kunnen staan en 'in elkaar' lijken te staan. 
+        // Radius beslist dat de vorm uitlijnt op de lijn van de vorige vorm.
+        rectMode(CENTER);
+          // kleurinvulling van element. (geen)
+          noFill();
+          // Zorgt voor een dunne omlijning rond een vorm.
+          stroke(random(COLORS));
+          // lijndikte.
+          strokeWeight(random([1],[9]));
+          // Voeg onderaan de credits toe. (naam)
+          addCredit();"Indra Van Doren"
+          // Zorgt ervoor dat het canvas geen omtreklijn heeft. 
+          noStroke();
+       }
+
+      // Tekenfunctie voor grid op canvas.
+      function draw() {
+        let r = random(1);
+        if(r < 0.5 ){
+          // Geen dunne omlijning rond een vorm. 
+          noStroke();
+          // kleurinvulling van element.
+          fill(random(COLORS));
+          // Vorm op grid. (Positie Y-as, Positie X-as, Breedte, Hoogte)
+          rect(x, y, sz, sz);
+        } 
+        else {
+          // kleurinvulling van element. (GEEN)
+          noFill();
+          // Zorgt voor een dunne omlijning rond een vorm.
+          stroke(random(COLORS));
+          // lijndikte.
+          strokeWeight(random([1],[9]));
+          // Vorm op grid. (Positie Y-as, Positie X-as, Breedte, Hoogte)
+          rect(x, y, sz/2, sz/2);
+        }
+        // Zorgt voor de grootte van de vorm en de verschillen tussen elke vorm.
+          x = x + sz;
+        if(x >= width){
+          x = 100;
+        	y = y + sz;
+        }
+          // Zorgt voor de verschuiving van de vorm.
+        if(y >= height){
+          x = 100;
+          y = 100;
+        }
+      }
+
+      // Deze functie voegt de credits toe. 
+      function addCredit() {
+        const date = document.location.pathname.split(".html")[0].substring(1);
+        const p = createP(
+          `${date} — <a " target="_blank">Indra Van Doren</a>`
+        ).parent(select("main"));
+      }
+    </script>
+  </body>
+</html>
