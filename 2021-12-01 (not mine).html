@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>simple example</title>
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
+    <script src="https://unpkg.com/p5"></script>
+    <script>
+      // Kleurenpalet
+      const COLORS = ["#145da0", "#0c2d48", "#2e8bc0", "#b1d4e0"];
+
+      function setup() {
+        // Canvas van 400 op 400 pixels. Dit voegt de canvas tag toe in de pagina
+        createCanvas(400, 400);
+        // Zet color mode op Hue/Saturation/Brightness
+        colorMode(HSB);
+        // Stel de achtergrondkleur in. Als je dit één keer doet komen nieuwe elementen over de rest.
+        background(200, 30, 30);
+        // Voeg onderaan de credits toe (datum + naam)
+        addCredit();
+      }
+
+      function draw() {
+        // Zorg dat de random steeds dezelfde is om het flikkeren te vermijden.
+        randomSeed(0);
+        // Index geeft het "volgnummer" van elk elementje door.
+        let index = 0;
+        // Maak een grid met 8 rijen en 8 kolommen (400 / 50 = 8).
+        for (let gy = 0; gy < height; gy += 50) {
+          for (let gx = 0; gx < width; gx += 50) {
+            // Onthou de vorige positie.
+            push();
+            // Verschuif naar de juiste positie in het grid.
+            translate(gx, gy);
+            // Schaal met 50%; in drawElement kan je dan werken met een canvas van 100 op 100 pixels
+            scale(0.5);
+            // Teken het element.
+            drawElement(index);
+            // Ga terug naar de originele positie.
+            pop();
+            // Verhoog de index met 1 voor het volgende volgnummer.
+            index++;
+          }
+        }
+      }
+
+      // Deze functie zal je vooral moeten aanpassen. Hier kan je bepalen hoe elk element wordt getekend.
+      function drawElement(index) {
+        // Kies een willekeurige vulkleur uit het palet.
+        fill(random(COLORS));
+        stroke(0, 0.1);
+        // Teken een rechthoek die een beetje van de randen van het vakje staat.
+        // Probeer hier eens ellipse te gebruiken, of de coordinaten aan te passen, meerdere elementen te tekenen, eerst rotate te doen, etc.
+        rotate(random(-0.1, 0.1));
+        rect(10, 10, 80, 80);
+      }
+
+      // Deze functie voegt de credits toe. Hier moet je enkel je naam en de website URL aanpassen.
+      function addCredit() {
+        const date = document.location.pathname.split(".html")[0].substring(1);
+        const p = createP(
+          `${date} — <a href="https://www.google.com/" target="_blank">YOUR NAME</a>`
+        ).parent(select("main"));
+      }
+    </script>
+  </body>
+</html>
