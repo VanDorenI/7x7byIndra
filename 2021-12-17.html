@@ -39,8 +39,6 @@
             stroke(random(COLORS));
             // lijndikte.
             strokeWeight(random([0.5],[3]));
-            // Voeg onderaan de credits toe. (naam)
-            addCredit();"Indra Van Doren"
             // Zorgt ervoor dat het canvas geen omtreklijn heeft. 
             noStroke();
       }
@@ -75,14 +73,6 @@
         x = 10;
         y = 10;
       }
-    }
-
-      // Deze functie voegt de credits toe. 
-      function addCredit() {
-        const date = document.location.pathname.split(".html")[0].substring(1);
-        const p = createP(
-          `${date} — <a " target="_blank">Indra Van Doren</a>`
-        ).parent(select("main"));
       }
     </script>
   </body>

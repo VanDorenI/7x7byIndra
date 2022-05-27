@@ -21,8 +21,6 @@
           colorMode(HSB);
           // Stelt de achtergrondkleur in. 
           background(64,0,22);
-          // Voegt onderaan de credits toe. (naam)
-          addCredit();"Indra Van Doren"
           // zorgt ervoor dat het canvas geen omtreklijn heeft. 
           noStroke();
         
@@ -101,14 +99,6 @@
           rect(290, 300, 180, 50);
         // Ga terug naar de originele positie.
         pop();
-      }
-    
-      // Deze functie voegt de credits toe.
-      function addCredit() {
-        const date = document.location.pathname.split(".html")[0].substring(1);
-        const p = createP(
-          `${date} — Indra Van Doren</a>`
-        ).parent(select("main"));
       }
     </script>
   </body>
