@@ -91,6 +91,7 @@ async function showCodeVersion(e) {
     .querySelector("#archive-popup-button-live")
     .classList.remove("active");
   document.querySelector("#archive-popup-button-code").classList.add("active");
+  document.querySelector("#archive-popup-code-wrapper").scrollTop = 0;
 
   const res = await fetch(html);
   const htmlCode = await res.text();
