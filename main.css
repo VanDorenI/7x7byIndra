@@ -134,7 +134,7 @@ img {
 #archive-popup {
   position: relative;
   overflow: hidden;
-  top: 10vh;
+  top: 8vh;
   left: 10px;
   width: calc(100% - 20px);
   max-width: auto;
@@ -190,9 +190,6 @@ img {
   border:none;
 }
 
-.active {
-  font-weight: 500;
-}
 
 .archive-popup-button {
   font-family: Neutral;
@@ -207,8 +204,11 @@ img {
   border: none;
 }
 
+
+
 .archive-popup-button:hover {
   font-family: Neutral;
   font-weight: 500;
+  color: rgb(0, 0, 0);
   border: none;
 }
